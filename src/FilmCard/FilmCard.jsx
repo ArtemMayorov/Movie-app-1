@@ -122,7 +122,7 @@ export default class FilmCard extends Component {
                   return consumer.map(({ id, name }) => {
                     if (this.state.genreIds.find((genreId) => genreId === id)) {
                       return (
-                        <Tag className="card-genre">
+                        <Tag key={id} className="card-genre">
                           <span className="card-genre-text">{name}</span>
                         </Tag>
                       );

@@ -98,7 +98,7 @@ export default class App extends Component {
         </ServiceProvider>
       ) : (
         <ServiceProvider value={this.state.gengesList}>
-          <RatedPage options={this.state} />
+          <RatedPage options={this.state}  addAverange={this.addAverange} />
         </ServiceProvider>
       );
     return (

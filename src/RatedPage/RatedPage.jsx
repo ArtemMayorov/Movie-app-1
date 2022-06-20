@@ -44,6 +44,7 @@ export default class RatedPage extends Component {
     return (
       <>
         <FilmsList
+           addAverange={this.props.addAverange}
           filmList={filmList.slice(this.state.minValue, this.state.maxValue)}
         />
         <div className="searchPage-container">
