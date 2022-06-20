@@ -4,11 +4,11 @@ import "./FilmCard.css";
 import { Col, Row, Typography, Tag, Rate } from "antd";
 import { format } from "date-fns";
 
-import { ServeceConsumer } from "../services/servicesContext";
-import FilmServece from "../services/servece";
+import { ServiceConsumer } from "../services/servicesContext";
+import FilmService from "../services/services";
 
 export default class FilmCard extends Component {
-  filmServece = new FilmServece();
+  filmService = new FilmService();
 
   state = {
     srcForImg: "#",
@@ -33,7 +33,7 @@ export default class FilmCard extends Component {
     } = this.props.filmProps;
     this.idFilm = id;
     this.setState({
-      srcForImg: this.filmServece.getImage(backdrop_path),
+      srcForImg: this.filmService.getImage(backdrop_path),
       title: original_title,
       average: vote_average,
       data: release_date,
@@ -74,9 +74,11 @@ export default class FilmCard extends Component {
       }
       return clippedText;
     };
-    const ratedCards = this.filmServece.getRatedMovies();
-
-    const res = ratedCards.filter((elem) => elem.id === this.state.key);
+    const ratedCards = this.filmService.getRatedMovies();
+    let res = [];
+    if (ratedCards) {
+      res = ratedCards.filter((elem) => elem.id === this.state.key);
+    }
 
     const formatReitColor = (rate) => {
       let border = "2px solid ";
@@ -114,7 +116,7 @@ export default class FilmCard extends Component {
             </Typography>
 
             <div className="card-date">{formatTime(this.state.data)}</div>
-            <ServeceConsumer>
+            <ServiceConsumer>
               {(consumer) => {
                 if (this.state.genreIds) {
                   return consumer.map(({ id, name }) => {
@@ -128,7 +130,7 @@ export default class FilmCard extends Component {
                   });
                 }
               }}
-            </ServeceConsumer>
+            </ServiceConsumer>
             <Paragraph className="card-description">
               <span className="card-description-text">
                 {formatText(this.state.text, "description")}

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Empty, Pagination } from "antd";
 
-import FilmServece from "../services/servece";
+import FilmService from "../services/services";
 import FilmsList from "../FilmsList/FilmsList";
 
 export default class RatedPage extends Component {
-  filmServece = new FilmServece();
+  FilmService = new FilmService();
 
   state = {
     minValue: 0,
@@ -13,7 +13,7 @@ export default class RatedPage extends Component {
   };
 
   render() {
-    const filmList = this.filmServece.getRatedMovies();
+    const filmList = this.FilmService.getRatedMovies();
 
     const handlePage = (value) => {
       if (value <= 1) {

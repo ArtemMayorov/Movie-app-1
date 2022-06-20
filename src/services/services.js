@@ -1,6 +1,6 @@
 import plug from "./theMovie.svg";
 
-export default class FilmServece {
+export default class FilmService {
   src = { plug };
   _apiBase = "https://api.themoviedb.org/3";
   _apiKey = "api_key=6c8fa39627c89b3c87ca11fd477aab8c&";

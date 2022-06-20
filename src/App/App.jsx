@@ -3,14 +3,14 @@ import { uniqBy } from "lodash";
 
 import NoInternetConnection from "../services/NoInternetConnection";
 import "./App.css";
-import FilmServece from "../services/servece";
+import FilmService from "../services/services";
 import SearchPage from "../SearchPage/SearchPage";
 import MainHeader from "../MainHeader/MainHeader";
 import RatedPage from "../RatedPage/RatedPage";
-import { ServeceProvider } from "../services/servicesContext";
+import { ServiceProvider } from "../services/servicesContext";
 
 export default class App extends Component {
-  filmServece = new FilmServece();
+  filmService = new FilmService();
 
   state = {
     filmList: null,
@@ -52,7 +52,7 @@ export default class App extends Component {
     this.setState(() => ({
       dataAverage: [...this.state.dataAverage, { ...film, userAverage }],
     }));
-    this.filmServece.setRatedMovies(
+    this.filmService.setRatedMovies(
       uniqBy([...this.state.dataAverage, { ...film, userAverage }], "id")
     );
   };
@@ -62,11 +62,11 @@ export default class App extends Component {
       loadingSearchList: true,
       selectedPageNumber: page,
     });
-    const gengesList = await this.filmServece
+    const gengesList = await this.filmService
       .getGenres()
       .then()
       .catch(this.onError);
-    await this.filmServece
+    await this.filmService
       .getFilms(filmName, page)
       .then((filmsCollection) => {
         this.setState({
@@ -88,18 +88,18 @@ export default class App extends Component {
   render() {
     const page =
       this.state.selectedPage === "search" ? (
-        <ServeceProvider value={this.state.gengesList}>
+        <ServiceProvider value={this.state.gengesList}>
           <SearchPage
             setSearchText={this.setSearchText}
             getFimList={this.getFilmList}
             addAverange={this.addAverange}
             options={this.state}
           />
-        </ServeceProvider>
+        </ServiceProvider>
       ) : (
-        <ServeceProvider value={this.state.gengesList}>
+        <ServiceProvider value={this.state.gengesList}>
           <RatedPage options={this.state} />
-        </ServeceProvider>
+        </ServiceProvider>
       );
     return (
       <section className="container">

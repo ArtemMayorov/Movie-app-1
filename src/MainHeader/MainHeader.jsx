@@ -18,12 +18,12 @@ export default class MainHeader extends Component {
       {
         key: "search",
         className: "menu-item",
-        label: "search",
+        label: "Search",
       },
       {
         key: "rated",
         className: "menu-item",
-        label: "rated",
+        label: "Rated",
       },
     ];
 
