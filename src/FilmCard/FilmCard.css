@@ -97,7 +97,9 @@
 .ant-rate-star > div {
     transition: none;
 }
-
+h5.ant-typography, div.ant-typography-h5, div.ant-typography-h5 > textarea{
+    margin-bottom: 0px;
+}
 @media (max-width:780px){
     .grid-container{
         margin-right: 0 20%;
@@ -133,7 +135,7 @@
         overflow: hidden;
     }
     .card-genre{
-        margin: 0 8px 5px 0;
+        margin: 3px 8px 4px 0;
     }
     .card-description-text{
         display: block;

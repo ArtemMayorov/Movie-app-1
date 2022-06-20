@@ -62,10 +62,12 @@ export default class FilmCard extends Component {
     const formatText = (textForCard, section) => {
       if (!textForCard) textForCard = "No description";
       let clippedText = textForCard;
-      if (textForCard.length >= 53) {
+      console.log(clippedText);
+      if (textForCard.length >= 30) {
         clippedText = textForCard.split(" ");
         if (section === "title") {
-          clippedText = clippedText.slice(0, 9);
+          clippedText = clippedText.slice(0, 7);
+          
         } else if (section === "description") {
           clippedText = clippedText.slice(0, 20);
         }
