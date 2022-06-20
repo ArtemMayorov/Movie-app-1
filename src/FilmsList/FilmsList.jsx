@@ -15,8 +15,8 @@ export default class FilmsList extends Component {
     const { addAverange } = this.props;
 
     const filmCard = filmList.map((film) => (
-      <Col >
-        <FilmCard  key={film.id} filmProps={film} addAverange={addAverange} />
+      <Col key={film.id} >
+        <FilmCard   filmProps={film} addAverange={addAverange} />
       </Col>
     ));
     return <Row className="grid-container">{filmCard}</Row>;
