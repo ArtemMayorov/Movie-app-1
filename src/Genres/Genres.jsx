@@ -6,7 +6,7 @@ const Genres = (props) => {
   return (
     <ServiceConsumer>
       {(consumer) => {
-        if (props.genreIds) {
+        if (props.genreIds && consumer) {
           return consumer.map(({ id, name }) => {
             if (props.genreIds.find((genreId) => genreId === id)) {
               return (

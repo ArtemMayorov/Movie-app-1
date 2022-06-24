@@ -14,10 +14,15 @@ export default class SearchPage extends Component {
     searchText: "return",
     page: 1,
   };
-
-  handleChange = (page) => {
-    this.handlePage(this.state.searchText, page);
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.props.getFimList(this.state.searchText, this.state.page);
+    }
+    if (prevState.searchText !== this.state.searchText) {
+      this.props.setSearchText(this.state.searchText);
+      this.props.getFimList(this.state.searchText, 1);
+    }
+  }
 
   handleInput = (newSearchText) => {
     if (newSearchText.trim() === "") return;
@@ -25,15 +30,10 @@ export default class SearchPage extends Component {
       searchText: newSearchText,
       page: 1,
     });
-    this.props.setSearchText(newSearchText);
-    return this.props.getFimList(newSearchText, 1);
   };
 
   handlePage = (page) => {
-    this.props.getFimList(this.state.searchText, page);
-    this.setState({
-      page,
-    });
+    this.setState({ page });
   };
 
   debouncedHandleInput = debounce(this.handleInput, 2000);
@@ -75,7 +75,7 @@ export default class SearchPage extends Component {
             total={totalFilms}
             onChange={this.handlePage}
             showSizeChanger={false}
-            defaultCurrent={this.props.options.selectedPageNumber}
+            defaultCurrent={this.state.page}
             defaultPageSize={20}
           />
         </div>
