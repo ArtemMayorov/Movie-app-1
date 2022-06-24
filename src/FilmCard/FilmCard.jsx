@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
 import "./FilmCard.css";
-import { Col, Row, Typography, Tag, Rate } from "antd";
-import { format } from "date-fns";
+import { Col, Row, Typography, Rate } from "antd";
 
-import { ServiceConsumer } from "../services/servicesContext";
-import FilmService from "../services/services";
+import Genres from "../Genres/Genres";
+import { formatText, formatReitColor, formatTime } from "../helper/helper";
+import MoviesService from "../MoviesService/MoviesService";
 
 export default class FilmCard extends Component {
-  filmService = new FilmService();
+  filmService = new MoviesService();
 
   state = {
     srcForImg: "#",
@@ -52,46 +52,12 @@ export default class FilmCard extends Component {
       this.props.addAverange(this.props.filmProps, userAverage);
     };
 
-    const formatTime = (releaseDate) => {
-      if (!releaseDate) releaseDate = "0000-00-00";
-      const dateArguments = releaseDate.split("-");
-      const [y, m, d] = dateArguments;
-      return format(new Date(y, m, d), "MMMM d, Y");
-    };
-
-    const formatText = (textForCard, section) => {
-      if (!textForCard) textForCard = "No description";
-      let clippedText = textForCard;
-      console.log(clippedText);
-      if (textForCard.length >= 30) {
-        clippedText = textForCard.split(" ");
-        if (section === "title") {
-          clippedText = clippedText.slice(0, 7);
-          
-        } else if (section === "description") {
-          clippedText = clippedText.slice(0, 20);
-        }
-        clippedText = clippedText.join(" ");
-        clippedText = `${clippedText} ...`;
-      }
-      return clippedText;
-    };
     const ratedCards = this.filmService.getRatedMovies();
     let res = [];
     if (ratedCards) {
       res = ratedCards.filter((elem) => elem.id === this.state.key);
     }
 
-    const formatReitColor = (rate) => {
-      let border = "2px solid ";
-      if (rate >= 0 && rate < 3) border += "#E90000";
-      if (rate >= 3 && rate < 5) border += "#E97E00";
-      if (rate >= 5 && rate < 7) border += "#E9D100";
-      if (rate >= 7) border += "#66E900";
-      return {
-        border,
-      };
-    };
     const aver = res.length > 0 ? res[0].userAverage : 0;
 
     return (
@@ -116,23 +82,10 @@ export default class FilmCard extends Component {
                 <span className="card-average-text">{this.state.average}</span>
               </div>
             </Typography>
-
             <div className="card-date">{formatTime(this.state.data)}</div>
-            <ServiceConsumer>
-              {(consumer) => {
-                if (this.state.genreIds) {
-                  return consumer.map(({ id, name }) => {
-                    if (this.state.genreIds.find((genreId) => genreId === id)) {
-                      return (
-                        <Tag key={id} className="card-genre">
-                          <span className="card-genre-text">{name}</span>
-                        </Tag>
-                      );
-                    }
-                  });
-                }
-              }}
-            </ServiceConsumer>
+            {this.state.genreIds ? (
+              <Genres genreIds={this.state.genreIds} />
+            ) : null}
             <Paragraph className="card-description">
               <span className="card-description-text">
                 {formatText(this.state.text, "description")}

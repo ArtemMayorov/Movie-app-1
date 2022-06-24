@@ -1,23 +1,24 @@
-.searchPage-container{
-    text-align: center;
+.searchPage-container {
+  text-align: center;
 }
-.searchPage-pagination{
-    display: inline-block;
-    margin: auto;
+.searchPage-pagination {
+  display: inline-block;
+  margin: auto;
 }
-.ant-pagination-item{
-    border: none;
+.ant-pagination-item {
+  border: none;
 }
 .ant-pagination-item-active {
-    background: #1890FF;
-    color: #ffffff;
-    border-radius: 4px;
+  background: #1890ff;
+  color: #ffffff;
+  border-radius: 4px;
 }
-.ant-pagination-item-active a{
-    color: #ffffff;
-    height: 22px;
+.ant-pagination-item-active a {
+  color: #ffffff;
+  height: 22px;
 }
 
-.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
-    border: none;
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  border: none;
 }

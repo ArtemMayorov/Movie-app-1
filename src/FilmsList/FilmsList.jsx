@@ -14,11 +14,11 @@ export default class FilmsList extends Component {
     const { filmList } = this.props;
     const { addAverange } = this.props;
 
-    const filmCard = filmList.map((film) => (
+    const filmCardRender = filmList.map((film) => (
       <Col key={film.id}>
         <FilmCard filmProps={film} addAverange={addAverange} />
       </Col>
     ));
-    return <Row className="grid-container">{filmCard}</Row>;
+    return <Row className="grid-container">{filmCardRender}</Row>;
   }
 }

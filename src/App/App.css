@@ -1,12 +1,11 @@
-
-.container{
-    padding:36px;
-    margin: 0 auto;
-    max-width: 1010px;
-    background: #FFF;
+.container {
+  padding: 36px;
+  margin: 0 auto;
+  max-width: 1010px;
+  background: #fff;
 }
-@media(max-width:780px){
-    .container{
-        padding:16px;
-    }
+@media (max-width: 780px) {
+  .container {
+    padding: 16px;
+  }
 }

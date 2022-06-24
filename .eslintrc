@@ -35,7 +35,9 @@
     "semi": 0,
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
-    "import/no-unresolved": [2, { "caseSensitive": false }],
+    "import/extensions": "off",
+    "no-unused-vars":"off",
+    // "import/no-unresolved": [2, { "caseSensitive": false }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/order": [
       2,
@@ -48,7 +50,7 @@
           "sibling",
           "index"
         ],
-        "newlines-between": "always"
+        "newlines-between": null
       }
     ]
   },

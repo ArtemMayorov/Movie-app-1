@@ -10,7 +10,7 @@ export default class MainHeader extends Component {
 
   handleSelect = (page) => {
     this.setState(() => ({ selectedPage: page.key }));
-    this.props.getSelectedPage(page.key);
+    this.props.handleSelectedPage(page.key);
   };
 
   render() {

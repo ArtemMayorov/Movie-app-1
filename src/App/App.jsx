@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { uniqBy } from "lodash";
 
-import NoInternetConnection from "../services/NoInternetConnection";
+import NoInternetConnection from "../NoInternetConnection/NoInternetConnection";
 import "./App.css";
-import FilmService from "../services/services";
+import MoviesService from "../MoviesService/MoviesService";
 import SearchPage from "../SearchPage/SearchPage";
 import MainHeader from "../MainHeader/MainHeader";
 import RatedPage from "../RatedPage/RatedPage";
-import { ServiceProvider } from "../services/servicesContext";
+import { ServiceProvider } from "../MoviesService/MoviesServiceContext";
 
 export default class App extends Component {
-  filmService = new FilmService();
+  filmService = new MoviesService();
 
   state = {
     filmList: null,
@@ -23,7 +23,7 @@ export default class App extends Component {
     selectedPage: "search",
     selectedPageNumber: 1,
     searchText: "return",
-    gengesList: null,
+    genresList: null,
   };
 
   componentDidMount() {
@@ -62,7 +62,7 @@ export default class App extends Component {
       loadingSearchList: true,
       selectedPageNumber: page,
     });
-    const gengesList = await this.filmService
+    const genresList = await this.filmService
       .getGenres()
       .then()
       .catch(this.onError);
@@ -75,20 +75,21 @@ export default class App extends Component {
           totalFilms: filmsCollection.total_results,
           loading: false,
           loadingSearchList: false,
-          gengesList,
+          genresList,
         });
       })
       .catch(this.onError);
   };
 
-  getSelectedPage = (page) => {
+  handleSelectedPage = (page) => {
     this.setState(() => ({ selectedPage: page }));
   };
 
   render() {
+    const { genresList } = this.state;
     const page =
       this.state.selectedPage === "search" ? (
-        <ServiceProvider value={this.state.gengesList}>
+        <ServiceProvider value={genresList}>
           <SearchPage
             setSearchText={this.setSearchText}
             getFimList={this.getFilmList}
@@ -97,13 +98,13 @@ export default class App extends Component {
           />
         </ServiceProvider>
       ) : (
-        <ServiceProvider value={this.state.gengesList}>
-          <RatedPage options={this.state}  addAverange={this.addAverange} />
+        <ServiceProvider value={genresList}>
+          <RatedPage options={this.state} addAverange={this.addAverange} />
         </ServiceProvider>
       );
     return (
       <section className="container">
-        <MainHeader getSelectedPage={this.getSelectedPage} />
+        <MainHeader handleSelectedPage={this.handleSelectedPage} />
         <NoInternetConnection />
         {page}
       </section>

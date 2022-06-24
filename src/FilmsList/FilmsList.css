@@ -1,18 +1,18 @@
-.grid-container{
-    padding: 19px 0 40px 0px;
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
+.grid-container {
+  padding: 19px 0 40px 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-    column-gap: 32px;
-    row-gap:35px;
-    justify-content: center;
+  column-gap: 32px;
+  row-gap: 35px;
+  justify-content: center;
 }
-.spin{
-    margin: 10% auto;
-    display: block;
+.spin {
+  margin: 10% auto;
+  display: block;
 }
-@media (max-width:780px){
-    .grid-container{
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 780px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
 }

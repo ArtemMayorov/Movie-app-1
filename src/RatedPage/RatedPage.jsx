@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Empty, Pagination } from "antd";
 
-import FilmService from "../services/services";
+import MoviesService from "../MoviesService/MoviesService";
 import FilmsList from "../FilmsList/FilmsList";
 
 export default class RatedPage extends Component {
-  FilmService = new FilmService();
+  MoviesService = new MoviesService();
 
   state = {
     minValue: 0,
@@ -13,7 +13,9 @@ export default class RatedPage extends Component {
   };
 
   render() {
-    const filmList = this.FilmService.getRatedMovies();
+    const __emptyImage =
+      "https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg";
+    const filmList = this.MoviesService.getRatedMovies();
 
     const handlePage = (value) => {
       if (value <= 1) {
@@ -32,7 +34,7 @@ export default class RatedPage extends Component {
     if (!filmList) {
       return (
         <Empty
-          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          image={__emptyImage}
           imageStyle={{
             margin: 40,
             height: 60,
@@ -44,7 +46,7 @@ export default class RatedPage extends Component {
     return (
       <>
         <FilmsList
-           addAverange={this.props.addAverange}
+          addAverange={this.props.addAverange}
           filmList={filmList.slice(this.state.minValue, this.state.maxValue)}
         />
         <div className="searchPage-container">

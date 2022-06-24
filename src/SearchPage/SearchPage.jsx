@@ -6,8 +6,8 @@ import FilmsList from "../FilmsList/FilmsList";
 import SearchInput from "../SearchInput/SearchInput";
 import "./SearchPage.css";
 import "antd/dist/antd.css";
-import Loading from "../services/Loading";
-import Error from "../services/Error";
+import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 export default class SearchPage extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class SearchPage extends Component {
   };
 
   handleChange = (page) => {
-    this.updatePage(this.state.searchText, page);
+    this.handlePage(this.state.searchText, page);
   };
 
   handleInput = (newSearchText) => {
@@ -29,7 +29,7 @@ export default class SearchPage extends Component {
     return this.props.getFimList(newSearchText, 1);
   };
 
-  updatePage = (page) => {
+  handlePage = (page) => {
     this.props.getFimList(this.state.searchText, page);
     this.setState({
       page,
@@ -39,6 +39,8 @@ export default class SearchPage extends Component {
   debouncedHandleInput = debounce(this.handleInput, 2000);
 
   render() {
+    const __emptyImage =
+      "https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg";
     const {
       addAverange,
       options: { loading, error, filmList, loadingSearchList, totalFilms },
@@ -54,7 +56,7 @@ export default class SearchPage extends Component {
     const filmNotFound =
       filmList.length === 0 && !loadingSearchList ? (
         <Empty
-          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          image={__emptyImage}
           imageStyle={{
             margin: 40,
             height: 60,
@@ -71,7 +73,7 @@ export default class SearchPage extends Component {
           <Pagination
             className="searchPage-pagination"
             total={totalFilms}
-            onChange={this.updatePage}
+            onChange={this.handlePage}
             showSizeChanger={false}
             defaultCurrent={this.props.options.selectedPageNumber}
             defaultPageSize={20}
