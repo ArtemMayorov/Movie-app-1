@@ -4,8 +4,6 @@ import plug from "./theMovie.svg";
 
 export default class MoviesService {
   src = { plug };
-
-  // https: //api.themoviedb.org/3/authentication/guest_session/new?api_key=<<api_key>>
   _apiBase = "https://api.themoviedb.org/3";
   _apiKey = "api_key=6c8fa39627c89b3c87ca11fd477aab8c&";
   _apiImageBase = "https://image.tmdb.org/t/p/w500";

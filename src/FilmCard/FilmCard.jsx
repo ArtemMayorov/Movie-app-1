@@ -6,11 +6,8 @@ import plug from "../MoviesService/theMovie.svg";
 
 import Genres from "../Genres/Genres";
 import { formatText, formatReitColor, formatTime } from "../helper/helper";
-import MoviesService from "../MoviesService/MoviesService";
 
 export default class FilmCard extends Component {
-  filmService = new MoviesService();
-
   render() {
     const _apiImageBases = "https://image.tmdb.org/t/p/w500";
     const {
@@ -28,7 +25,7 @@ export default class FilmCard extends Component {
       this.props.addAverange(this.props.filmProps, userAverage);
     };
 
-    const ratedCards = this.filmService.getRatedMovies();
+    const ratedCards = JSON.parse(localStorage.getItem("dataAverage"));
 
     let res = [];
     if (ratedCards) {

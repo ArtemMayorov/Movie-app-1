@@ -130,6 +130,7 @@ export default class App extends Component {
           <RatedPage options={this.state} addAverange={this.addAverange} />
         </ServiceProvider>
       );
+
     return (
       <section className="container">
         <MainHeader handleSelectedPage={this.handleSelectedPage} />
